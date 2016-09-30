@@ -1,3 +1,4 @@
+package servlet;
 import java.io.IOException;
 import java.util.Date;
 import java.util.HashMap;
@@ -12,7 +13,7 @@ import entity.Note;
 /**
  * Servlet implementation class ToDoListServlet
  */
-@WebServlet("")
+@WebServlet("/ToDoListServlet")
 public class ToDoListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	Map<Integer, Note> list = new HashMap<Integer, Note>();

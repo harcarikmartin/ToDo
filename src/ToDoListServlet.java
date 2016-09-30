@@ -1,4 +1,5 @@
 import java.io.IOException;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import javax.servlet.ServletException;
@@ -6,7 +7,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import entity.Note;
 
 /**
@@ -17,6 +17,7 @@ public class ToDoListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	Map<Integer, Note> list = new HashMap<Integer, Note>();
 	int i;
+	
 	
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
@@ -32,7 +33,7 @@ public class ToDoListServlet extends HttpServlet {
 				&& !request.getParameter("taskBody").isEmpty()) {
 			list.put(++i, new Note(i, request.getParameter("taskName").trim(), request.getParameter("taskBody").trim()));
 //			System.out.println(list);
-		} else if("removeCompletedTasks".equals(action)) {
+		} else if("removeCompletedTasks".equals(action) && request.getParameter("toDelete") != null) {
 			String[] ids = request.getParameterValues("toDelete");
 			for(String id:ids) {
 				list.values().remove(list.get(Integer.parseInt(id)));
@@ -49,6 +50,7 @@ public class ToDoListServlet extends HttpServlet {
 	}
 	
 	private void forwardToList(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setAttribute("date", new Date().toString());
 		request.setAttribute("list", list.values());
 		request.getRequestDispatcher("/WEB-INF/jsp/toDoList.jsp").forward(request, response);
 	}

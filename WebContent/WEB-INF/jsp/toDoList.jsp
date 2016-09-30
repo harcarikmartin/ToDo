@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<link rel="stylesheet" href="style.css" type="text/css" media="screen">
+<link rel="stylesheet" href="style.css" type="text/css">
 <title>To Do List</title>
 </head>
 <body>
@@ -41,8 +41,10 @@
 		        var input = $(this).next("label");
 		        if (this.checked) {
 		            $(input).css("textDecoration", "line-through");
+		            $(input).css("color", "grey");
 		        } else {
 		            $(input).css("textDecoration", "none");
+		            $(input).css("color", "black");
 		        }
 		    })
 		})
